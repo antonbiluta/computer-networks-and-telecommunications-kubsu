@@ -11,7 +11,7 @@ public class SimulationClock {
     }
 
     public void advanceTime(double newTime) {
-        if (newTime > currentTime) {
+        if (newTime >= currentTime) {
             currentTime = newTime;
         } else {
             throw new IllegalArgumentException("Simulation time cannot move backwards.");

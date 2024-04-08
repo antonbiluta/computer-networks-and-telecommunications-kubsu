@@ -4,36 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae4126ad-dca3-4e10-a103-8c7ce1cd705d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/biluta/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/biluta/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Buffer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/NewServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/RandomGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Simulation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/SimulationGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/TaskEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/TaskGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/utils/RayleighDistribution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Buffer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/SimulationClock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/utils/RandomGenerators.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/utils/RayleighDistribution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/test/java/ru/biluta/AppTest.java" afterDir="false" />
+    <list default="true" id="ae4126ad-dca3-4e10-a103-8c7ce1cd705d" name="Changes" comment="initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/SimulationClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/SimulationClock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,11 +99,60 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712514393473</updated>
-      <workItem from="1712514394700" duration="19238000" />
+      <workItem from="1712514394700" duration="20975000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1712614105257</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712614105257</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/SimulationClock.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/SimulationClock.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

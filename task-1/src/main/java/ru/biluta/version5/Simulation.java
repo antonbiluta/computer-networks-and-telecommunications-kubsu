@@ -13,8 +13,6 @@ public class Simulation {
     private int totalTasksGenerated;
     private int totalTasksProcessed;
     private int totalTasksDropped;
-    private double idleTime;
-    private double lastEventTime;
 
     public Simulation(double sigma, int k, double lambda, int bufferSize, int cores, int maxTasks) {
         this.eventQueue = new PriorityQueue<>();
@@ -25,22 +23,22 @@ public class Simulation {
         this.totalTasksGenerated = maxTasks;
         this.totalTasksProcessed = 0;
         this.totalTasksDropped = 0;
-        this.idleTime = 0.0;
-        this.lastEventTime = 0.0;
 
         scheduleNextTaskArrival();
     }
 
     private void scheduleNextTaskArrival() {
-        if (totalTasksGenerated > 0) {
+        if ((totalTasksProcessed + totalTasksDropped) < totalTasksGenerated) {
             double nextArrivalTime = clock.getCurrentTime() + randomGenerators.generateErlang();
-            eventQueue.add(new Event(Event.EventType.TASK_ARRIVAL, nextArrivalTime, new Task(nextArrivalTime, randomGenerators.generateRayleigh()), null));
-            totalTasksGenerated--;
+            double processingTime = randomGenerators.generateRayleigh();
+            Task task = new Task(nextArrivalTime, processingTime);
+            Event event = new Event(Event.EventType.TASK_ARRIVAL, nextArrivalTime, task, null);
+            eventQueue.add(event);
         }
     }
 
     public void run() {
-        while (!eventQueue.isEmpty() || totalTasksGenerated > 0) {
+        while (!eventQueue.isEmpty() || (totalTasksProcessed + totalTasksDropped) < totalTasksGenerated) {
             Event event = eventQueue.poll();
             if (event != null) {
                 clock.advanceTime(event.getTime());
@@ -79,21 +77,28 @@ public class Simulation {
 
     private void handleTaskCompletion(Integer coreIndex) {
         server.completeTask(coreIndex);
+        if (!buffer.isEmpty()) {
+            dispatchTasks();
+        } else {
+            server.markCoreIdle(coreIndex);
+        }
         totalTasksProcessed++;
-        dispatchTasks();
     }
 
     private void dispatchTasks() {
         while (!buffer.isEmpty() && server.hasIdleCore()) {
             Task nextTask = buffer.getNextTask();
             Integer coreIndex = server.processTask(nextTask);
+            server.markCoreBusy(coreIndex);
+
             double completionTime = clock.getCurrentTime() + nextTask.getProcessingTime();
-            eventQueue.add(new Event(Event.EventType.TASK_COMPLETION, completionTime, nextTask, coreIndex));
+            Event event = new Event(Event.EventType.TASK_COMPLETION, completionTime, nextTask, coreIndex);
+            eventQueue.add(event);
         }
     }
 
     private void printStatistics() {
-        double probabilityOfIdle = idleTime / clock.getCurrentTime();
+        double probabilityOfIdle = server.getIdleTime() / clock.getCurrentTime();
         double probabilityOfRejection = (double) totalTasksDropped / (totalTasksGenerated + totalTasksDropped);
         System.out.println("Probability of idle: " + probabilityOfIdle);
         System.out.println("Probability of rejection: " + probabilityOfRejection);
@@ -102,7 +107,7 @@ public class Simulation {
     }
 
     public static void main(String[] args) {
-        Simulation simulation = new Simulation(1.0, 3, 0.5, 5, 1, 10000);
+        Simulation simulation = new Simulation(1.0, 3, 0.5, 5, 1, 100000);
         simulation.run();
     }
 }
