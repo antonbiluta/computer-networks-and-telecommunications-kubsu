@@ -1,5 +1,6 @@
 package ru.biluta.version5;
 
+import ru.biluta.utils.SimulationClock;
 import ru.biluta.version5.utils.RandomGenerators;
 
 import java.util.PriorityQueue;

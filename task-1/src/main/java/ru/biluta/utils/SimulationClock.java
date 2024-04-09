@@ -1,4 +1,4 @@
-package ru.biluta.version5;
+package ru.biluta.utils;
 
 import lombok.Getter;
 
