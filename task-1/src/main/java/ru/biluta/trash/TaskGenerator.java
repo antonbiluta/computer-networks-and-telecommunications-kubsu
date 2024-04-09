@@ -1,9 +1,7 @@
-package ru.biluta;
+package ru.biluta.trash;
 
-import org.apache.commons.math3.distribution.AbstractRealDistribution;
 import org.apache.commons.math3.distribution.ExponentialDistribution;
 import org.apache.commons.math3.random.JDKRandomGenerator;
-import ru.biluta.utils.RayleighDistribution;
 
 public class TaskGenerator {
     private final ExponentialDistribution arrivalDistribution;

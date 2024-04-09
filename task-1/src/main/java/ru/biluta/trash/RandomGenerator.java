@@ -1,4 +1,4 @@
-package ru.biluta;
+package ru.biluta.trash;
 
 import org.apache.commons.math3.distribution.ExponentialDistribution;
 import org.apache.commons.math3.distribution.GammaDistribution;

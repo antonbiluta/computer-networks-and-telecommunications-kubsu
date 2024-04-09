@@ -1,130 +1,164 @@
 package ru.biluta;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import ru.biluta.model.Event;
+import ru.biluta.model.Task;
+import ru.biluta.service.EventDispatcher;
+import ru.biluta.system.Buffer;
+import ru.biluta.system.Core;
+import ru.biluta.system.Server;
+import ru.biluta.utils.RandomGenerators;
+import ru.biluta.service.TaskManager;
+
 import java.util.List;
-import java.util.Queue;
+import java.util.PriorityQueue;
 
 public class Simulation {
 
-    private final NewServer server;
-    private final Buffer buffer;
+    private final String name;
+    private final int lengthDashes = 15;
+    private final Server server;
+    private final TaskManager taskManager;
+    private final EventDispatcher eventDispatcher;
+    private int totalTasksGenerated;
+    private int totalTasksProcessed;
+    private int totalTasksDropped;
     private final int maxTasks;
-    private double currentTime = 0.0;
-    private int processedTasks = 0;
-    private int totalTasks = 0;
-    private int droppedTasks = 0;
-    private RandomGenerator generator = new RandomGenerator(2.0, 1.0, 3);
 
-    public Simulation(int bufferSize, int maxTasks) {
-        this.server = new NewServer();
-        this.buffer = new Buffer(bufferSize);
+    private final double sigma;
+    private final double lambda;
+    private final int numberOfCores;
+
+    public Simulation(String name, double sigma, int k, double lambda, int bufferSize, int cores, int maxTasks) {
+        this.name = name;
+        this.sigma = sigma;
+        this.lambda = lambda;
+        this.numberOfCores = cores;
+
+        this.server = new Server(cores, bufferSize);
+        this.taskManager = new TaskManager(sigma, lambda, k);
+        this.eventDispatcher = new EventDispatcher(sigma, lambda, k);
+
         this.maxTasks = maxTasks;
+
+        this.totalTasksGenerated = 0;
+        this.totalTasksProcessed = 0;
+        this.totalTasksDropped = 0;
     }
 
     public void run() {
-        double arrivalTime = currentTime + generator.generateErlang();
-        while (processedTasks < maxTasks && totalTasks < maxTasks) {
-            double processingTime = generator.generateRayleigh();
-            Task newTask = new Task(arrivalTime, processingTime);
+        scheduleTaskArrival();
 
-            if (!buffer.addTask(newTask)) {
-                droppedTasks++;
-            }
+        while (!eventDispatcher.isQueueEmpty() && (totalTasksProcessed < maxTasks)) {
+            Event currentEvent = eventDispatcher.getFirst();
+            server.advanceSystemTime(currentEvent.getTime());
 
-            if (server.isIdle() && !buffer.isEmpty()) {
-                Task task = buffer.getNextTask();
-                server.processTask(task, currentTime);
-                currentTime = server.getCurrentTime();
+            switch (currentEvent.getType()) {
+                case TASK_ARRIVAL:
+                    handleTaskArrival(currentEvent);
+                    break;
+                case TASK_COMPLETION:
+                    handleTaskCompletion(currentEvent);
+                    break;
             }
-
-            if (server.checkAndCompleteTask(currentTime)) {
-                processedTasks++;
-            }
-            arrivalTime = currentTime + generator.generateErlang();
-            double taskCompletionTime = server.isIdle() ? Double.MAX_VALUE : server.getCurrentTime();
-            currentTime = Math.min(arrivalTime, taskCompletionTime);
-            totalTasks++;
         }
-        System.out.println("Total tasks: " + totalTasks);
-        System.out.println("Dropped tasks: " + droppedTasks);
-        System.out.println("Efficiency: " + ((double)(totalTasks - droppedTasks) / totalTasks));
+
+        printStatistics();
+    }
+
+    private void scheduleTaskArrival() {
+        if (totalTasksGenerated < maxTasks) {
+            Task newTask = taskManager.generateTask();
+            eventDispatcher.createArrivalEvent(newTask, null, server.getSystemTime());
+            totalTasksGenerated++;
+        }
+    }
+
+    private void handleTaskArrival(Event event) {
+        Task task = event.getTask();
+        if (server.hasIdleCore()) {
+            Integer coreIndex = server.processTask(task);
+            eventDispatcher.createCompletionEvent(task, coreIndex, server.getSystemTime());
+            totalTasksProcessed++;
+        } else {
+            boolean added = server.addToBuffer(task);
+            if (!added) {
+                totalTasksDropped++;
+            }
+        }
+        scheduleTaskArrival();
+    }
+
+    private void handleTaskCompletion(Event event) {
+        server.completeTask(event);
+        if (!server.bufferIsEmpty()) {
+            Task newTask = server.getNextTask();
+            Integer coreIndex = server.processTask(newTask);
+            eventDispatcher.createCompletionEvent(newTask, coreIndex, server.getSystemTime());
+            totalTasksProcessed++;
+        }
+    }
+
+    private void printStatistics() {
+        double probabilityOfIdle = server.getIdleTime() / server.getSystemTime();
+        double probabilityOfRejection = (double) totalTasksDropped / (totalTasksGenerated + totalTasksDropped);
+        printDashes();
+        printDashesWithName();
+        printDashes();
+        System.out.println("Sigma: " + sigma + "; Lambda: " + lambda + "; Cores: " + numberOfCores);
+        System.out.println("Probability of idle (Server): " + probabilityOfIdle);
+        List<Core> cores = server.getCores();
+        for (int i = 0; i < numberOfCores; i++) {
+            double probabilityOfIdleCore = cores.get(i).getIdleTime() / server.getSystemTime();
+            System.out.println("Probability of idle (Core " + (i + 1) + "): " + probabilityOfIdleCore);
+        }
+        System.out.println("Probability of rejection: " + probabilityOfRejection);
+        System.out.println("Total tasks processed: " + totalTasksProcessed);
+        System.out.println("Total tasks dropped: " + totalTasksDropped);
+        System.out.println("Total tasks generated: " + totalTasksGenerated);
+        printDashes();
+        printEnter();
+    }
+
+    private void printDashesWithName() {
+        int lengthTirePart = (lengthDashes - name.length()) / 2;
+        StringBuilder builder = new StringBuilder();
+        StringBuilder builder2 = new StringBuilder();
+        for (int i = 0; i < lengthTirePart; i++) {
+            builder.append("-");
+            builder2.append("-");
+        }
+        if (lengthTirePart * 2 + name.length() != lengthDashes) {
+            builder2.append("-");
+        }
+        System.out.println(builder + name.toUpperCase() + builder2);
+    }
+
+    private void printDashes() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < lengthDashes; i++) {
+            builder.append("-");
+        }
+        System.out.println(builder);
+    }
+
+    private void printEnter() {
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        Simulation simulation = new Simulation(3, 10000);
-        simulation.run();
+        Simulation simulation1 = new Simulation("test1", 1, 3, 2, 3, 1, 10000);
+        simulation1.run();
+
+        Simulation simulation2 = new Simulation("test2", 2, 3, 1, 3, 1, 10000);
+        simulation2.run();
+
+        Simulation simulation3 = new Simulation("test3", 6, 3, 2, 3, 1, 10000);
+        simulation3.run();
+
+        Simulation simulation4 = new Simulation("test4", 1, 3, 6, 3, 4, 10000);
+        simulation4.run();
+
+        Simulation simulation5 = new Simulation("test5", 2, 3, 1, 3, 3, 1000000);
+        simulation5.run();
     }
-
-
-
-//    private static final double LAMBDA_ARRIVAL = 0.5; // Пример параметра для распределения Эрланга
-//    private static final double SIGMA_PROCESSING = 1.0; // Пример параметра для распределения Рэлея
-//    private static final int BUFFER_SIZE = 3; // Размер буфера
-//    private static final int TOTAL_TASKS = 1000; // Общее количество задач для обработки
-//
-//    public static void main(String[] args) {
-//        TaskGenerator taskGenerator = new TaskGenerator(LAMBDA_ARRIVAL, SIGMA_PROCESSING);
-//        Server server = new Server(BUFFER_SIZE);
-//
-//        for (int i = 0; i < TOTAL_TASKS; i++) {
-//            Task task = taskGenerator.generateTask();
-//            double time = task.getArrivalTime();
-//            server.scheduleEvent(new TaskEvent(TaskEvent.EventType.ARRIVAL, task, time));
-//        }
-//
-//        server.run();
-//
-//        System.out.println(server.getTotalTasks());
-//        System.out.println("Вероятность отказа: " + server.getDenialProbability());
-//        System.out.println("Вероятность простоя сервера: " + server.getIdleProbability());
-//    }
-
-//    private Server server;
-//    private RandomGenerator generator;
-//    private final int totalIterations;
-//    private List<Task> inStream = new ArrayList<>();
-//    private List<Task> outStream = new ArrayList<>();
-//
-//    public Simulation(int queueCapacity, int totalIterations) {
-//        this.server = new Server(queueCapacity);
-//        this.generator = new RandomGenerator(2.0, 1.0, 3);
-//        this.totalIterations = totalIterations;
-//    }
-//
-//    public void run() {
-//        double lastArrivalTime = 0.0; // Время прибытия последней задачи
-//        for (int i = 0; i < totalIterations; i++) {
-//            double interArrivalTime = generator.generateErlang();
-//            double processingTime = generator.generateRayleigh();
-//            lastArrivalTime += interArrivalTime;
-//
-//            Task task = new Task(lastArrivalTime, processingTime);
-//            server.addTask(task);
-//        }
-//
-//    }
-//
-//    public void printResult() {
-//        System.out.println("Total tasks processed: " + server.getTasksProcessed());
-//        System.out.println("Total tasks rejected: " + server.getTasksRejected());
-//        System.out.println("Total processing time: " + server.getTotalProcessingTime());
-//        System.out.println("Pidle: " + server.getPidle());
-//        System.out.println("Pотказа: " + server.getPотказа());
-//    }
-//
-//    public List<Task> getInStream() {
-//        return inStream;
-//    }
-//
-//    public List<Task> getOutStream() {
-//        return outStream;
-//    }
-//
-//    public static void main(String[] args) {
-//        Simulation simulation = new Simulation(3, 10000);
-//        simulation.run();
-//        simulation.printResult();
-//    }
-
 }

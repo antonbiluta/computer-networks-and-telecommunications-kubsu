@@ -1,4 +1,4 @@
-package ru.biluta.version5.utils;
+package ru.biluta.utils;
 
 import org.apache.commons.math3.distribution.GammaDistribution;
 import org.apache.commons.math3.random.Well19937c;

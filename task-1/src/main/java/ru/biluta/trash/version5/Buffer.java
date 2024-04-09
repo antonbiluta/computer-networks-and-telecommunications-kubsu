@@ -1,4 +1,4 @@
-package ru.biluta;
+package ru.biluta.trash.version5;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -16,9 +16,8 @@ public class Buffer {
         if (queue.size() < maxSize) {
             queue.add(task);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public Task getNextTask() {
@@ -28,4 +27,9 @@ public class Buffer {
     public boolean isEmpty() {
         return queue.isEmpty();
     }
+
+    public int getCurrentSize() {
+        return queue.size();
+    }
+
 }

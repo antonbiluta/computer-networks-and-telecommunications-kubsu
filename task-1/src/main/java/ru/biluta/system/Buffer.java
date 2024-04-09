@@ -1,4 +1,6 @@
-package ru.biluta.version5;
+package ru.biluta.system;
+
+import ru.biluta.model.Task;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -31,5 +33,4 @@ public class Buffer {
     public int getCurrentSize() {
         return queue.size();
     }
-
 }

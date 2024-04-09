@@ -1,4 +1,4 @@
-package ru.biluta.version5;
+package ru.biluta.trash.version5;
 
 import lombok.Getter;
 

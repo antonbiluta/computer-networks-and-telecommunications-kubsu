@@ -1,4 +1,4 @@
-package ru.biluta;
+package ru.biluta.trash;
 
 import lombok.Getter;
 import lombok.Setter;
