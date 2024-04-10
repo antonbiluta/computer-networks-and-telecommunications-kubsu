@@ -14,7 +14,10 @@ public class Event implements Comparable<Event> {
     private final Task task;
     private final Integer coreIndex;
 
-    public Event(EventType eventType, double eventTime, Task task, Integer coreIndex) {
+    public Event(EventType eventType,
+                 double eventTime,
+                 Task task,
+                 Integer coreIndex) {
         this.type = eventType;
         this.time = eventTime;
         this.task = task;

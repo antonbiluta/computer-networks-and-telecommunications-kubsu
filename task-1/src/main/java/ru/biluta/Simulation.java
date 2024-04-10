@@ -3,14 +3,11 @@ package ru.biluta;
 import ru.biluta.model.Event;
 import ru.biluta.model.Task;
 import ru.biluta.service.EventDispatcher;
-import ru.biluta.system.Buffer;
 import ru.biluta.system.Core;
 import ru.biluta.system.Server;
-import ru.biluta.utils.RandomGenerators;
 import ru.biluta.service.TaskManager;
 
 import java.util.List;
-import java.util.PriorityQueue;
 
 public class Simulation {
 
@@ -28,7 +25,13 @@ public class Simulation {
     private final double lambda;
     private final int numberOfCores;
 
-    public Simulation(String name, double sigma, int k, double lambda, int bufferSize, int cores, int maxTasks) {
+    public Simulation(String name,
+                      double sigma,
+                      int k,
+                      double lambda,
+                      int bufferSize,
+                      int cores,
+                      int maxTasks) {
         this.name = name;
         this.sigma = sigma;
         this.lambda = lambda;
@@ -67,7 +70,7 @@ public class Simulation {
 
     private void scheduleTaskArrival() {
         if (totalTasksGenerated < maxTasks) {
-            Task newTask = taskManager.generateTask();
+            Task newTask = taskManager.createTask();
             eventDispatcher.createArrivalEvent(newTask, null, server.getSystemTime());
             totalTasksGenerated++;
         }
@@ -143,22 +146,5 @@ public class Simulation {
 
     private void printEnter() {
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        Simulation simulation1 = new Simulation("test1", 1, 3, 2, 3, 1, 10000);
-        simulation1.run();
-
-        Simulation simulation2 = new Simulation("test2", 2, 3, 1, 3, 1, 10000);
-        simulation2.run();
-
-        Simulation simulation3 = new Simulation("test3", 6, 3, 2, 3, 1, 10000);
-        simulation3.run();
-
-        Simulation simulation4 = new Simulation("test4", 1, 3, 6, 3, 4, 10000);
-        simulation4.run();
-
-        Simulation simulation5 = new Simulation("test5", 2, 3, 1, 3, 3, 1000000);
-        simulation5.run();
     }
 }

@@ -11,7 +11,7 @@ public class TaskManager {
         this.generators = new RandomGenerators(sigma, lambda, k);
     }
 
-    public Task generateTask() {
+    public Task createTask() {
         double processingTime = generators.generateRayleigh();
         return new Task(processingTime);
     }

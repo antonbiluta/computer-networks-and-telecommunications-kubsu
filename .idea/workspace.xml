@@ -4,38 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae4126ad-dca3-4e10-a103-8c7ce1cd705d" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/service/EventDispatcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/service/TaskManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/system/Core.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/system/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/RayleighDistribution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/Simulation.java" afterDir="false" />
+    <list default="true" id="ae4126ad-dca3-4e10-a103-8c7ce1cd705d" name="Changes" comment="new version">
+      <change afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/CustomOS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/Buffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/NewServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/NewServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/RandomGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/RandomGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Simulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/SimulationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/SimulationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/TaskEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/TaskEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/TaskGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/utils/RayleighDistribution.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/utils/RayleighDistribution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/utils/SimulationClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/system/SimulationClock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/version5/Buffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/version5/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/version5/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/version5/Simulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/trash/version5/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/utils/RandomGenerators.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/utils/RandomGenerators.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version5/utils/RayleighDistribution.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version6/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/system/Buffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version6/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/model/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version6/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version6/Simulation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/version6/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/model/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/model/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/service/EventDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/service/EventDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/service/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/service/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/system/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-1/src/main/java/ru/biluta/system/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +39,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CustomOS.executor": "Run",
     "Application.Simulation.executor": "Run",
     "Application.ru.biluta.Simulation.executor": "Run",
     "Application.ru.biluta.version5.Simulation.executor": "Run",
@@ -87,7 +64,20 @@
       <recent name="ru.biluta" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ru.biluta.Simulation">
+  <component name="RunManager" selected="Application.CustomOS">
+    <configuration name="CustomOS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.biluta.CustomOS" />
+      <module name="task-1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.biluta.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Simulation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.biluta.trash.Simulation" />
       <module name="task-1" />
@@ -129,6 +119,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CustomOS" />
         <item itemvalue="Application.ru.biluta.Simulation" />
         <item itemvalue="Application.ru.biluta.version5.Simulation" />
         <item itemvalue="Application.Simulation" />
@@ -154,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712614105257</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="new version">
+      <option name="closed" value="true" />
+      <created>1712701889319</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712701889319</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,14 +172,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="new version" />
+    <option name="LAST_COMMIT_MESSAGE" value="new version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/task-1/src/main/java/ru/biluta/Simulation.java</url>
-          <line>93</line>
+          <line>96</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>

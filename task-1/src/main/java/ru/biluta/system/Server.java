@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
+
     @Getter
     private final List<Core> cores;
-    private Buffer buffer;
-    private SimulationClock systemClock;
+    private final Buffer buffer;
+    private final SimulationClock systemClock;
 
     @Getter
     private double idleTime;
@@ -29,11 +30,7 @@ public class Server {
         this.startIdleTime = -1;
     }
 
-    private void initializeCores(int numberOfCores) {
-        for (int i = 0; i < numberOfCores; i++) {
-            cores.add(new Core(i));
-        }
-    }
+    // WORK WITH TASK
 
     public Integer processTask(Task task) {
         markServerBusy();
@@ -54,6 +51,18 @@ public class Server {
         markCoreIdle(coreIndex);
         if (allCoreIsIdle()) {
             markServerIdle();
+        }
+    }
+
+    public Task getNextTask() {
+        return buffer.getNextTask();
+    }
+
+    // WORK WITH CORES
+
+    private void initializeCores(int numberOfCores) {
+        for (int i = 0; i < numberOfCores; i++) {
+            cores.add(new Core(i));
         }
     }
 
@@ -88,6 +97,8 @@ public class Server {
         }
     }
 
+    // WORK WITH SERVER
+
     public void markServerIdle() {
         startIdleTime = systemClock.getCurrentTime();
     }
@@ -99,6 +110,8 @@ public class Server {
         }
     }
 
+    // WORK WITH SYSTEM CLOCK
+
     public double getSystemTime() {
         return systemClock.getCurrentTime();
     }
@@ -106,6 +119,8 @@ public class Server {
     public void advanceSystemTime(double newTime) {
         systemClock.advanceTime(newTime);
     }
+
+    // WORK WITH BUFFER
 
     public boolean addToBuffer(Task task) {
         return buffer.addTask(task);
@@ -115,7 +130,4 @@ public class Server {
         return buffer.isEmpty();
     }
 
-    public Task getNextTask() {
-        return buffer.getNextTask();
-    }
 }

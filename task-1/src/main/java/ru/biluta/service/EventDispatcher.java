@@ -8,8 +8,8 @@ import java.util.PriorityQueue;
 
 public class EventDispatcher {
 
-    private PriorityQueue<Event> eventQueue;
-    private RandomGenerators generators;
+    private final PriorityQueue<Event> eventQueue;
+    private final RandomGenerators generators;
 
     public EventDispatcher(double sigma, double lambda, int k) {
         this.eventQueue = new PriorityQueue<>();
