@@ -4,20 +4,23 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.biluta.model.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class Core {
 
     private final int index;
     private boolean isBusy;
     private Task currentTask;
-    private double idleTime;
+    private List<Double> idleTimes;
     @Setter
     private double startIdleTime;
 
     public Core(int index) {
         this.index = index;
         this.isBusy = false;
-        this.idleTime = 0.0;
+        this.idleTimes = new ArrayList<>();
         this.startIdleTime = -1;
     }
 
@@ -32,7 +35,16 @@ public class Core {
     }
 
     public void addIdleTime(double currentTime) {
-        idleTime += currentTime - startIdleTime;
+        double idleTime = currentTime - startIdleTime;
+        idleTimes.add(idleTime);
+    }
+
+    public double calculateSummaryIdleTime() {
+        double sum = 0;
+        for (double idleTime : idleTimes) {
+            sum += idleTime;
+        }
+        return sum;
     }
 
 }

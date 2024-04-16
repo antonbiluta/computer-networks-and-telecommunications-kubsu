@@ -17,6 +17,4 @@ public class SimulationClock {
             throw new IllegalArgumentException("Simulation time cannot move backwards.");
         }
     }
-
-
 }

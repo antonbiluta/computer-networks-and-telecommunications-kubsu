@@ -15,7 +15,7 @@ public class Server {
     private final SimulationClock systemClock;
 
     @Getter
-    private double idleTime;
+    private List<Double> idleTimes;
     private double startIdleTime;
 
     public Server(int numberOfCores, int bufferSize) {
@@ -26,7 +26,7 @@ public class Server {
 
         this.systemClock = new SimulationClock();
 
-        this.idleTime = 0.0;
+        this.idleTimes = new ArrayList<>();
         this.startIdleTime = -1;
     }
 
@@ -105,7 +105,8 @@ public class Server {
 
     public void markServerBusy() {
         if (startIdleTime != -1) {
-            idleTime += systemClock.getCurrentTime() - startIdleTime;
+            double idleTime = systemClock.getCurrentTime() - startIdleTime;
+            idleTimes.add(idleTime);
             startIdleTime = -1;
         }
     }
@@ -130,4 +131,13 @@ public class Server {
         return buffer.isEmpty();
     }
 
+    // FOR STATISTIC
+
+    public double calculateSummaryIdleTime() {
+        double sum = 0;
+        for (double idleTime : idleTimes) {
+            sum += idleTime;
+        }
+        return sum;
+    }
 }

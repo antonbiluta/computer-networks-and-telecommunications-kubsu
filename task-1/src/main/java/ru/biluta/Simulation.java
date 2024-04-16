@@ -1,5 +1,6 @@
 package ru.biluta;
 
+import lombok.Getter;
 import ru.biluta.model.Event;
 import ru.biluta.model.Task;
 import ru.biluta.service.EventDispatcher;
@@ -16,13 +17,20 @@ public class Simulation {
     private final Server server;
     private final TaskManager taskManager;
     private final EventDispatcher eventDispatcher;
+
+    @Getter
     private int totalTasksGenerated;
+    @Getter
     private int totalTasksProcessed;
+    @Getter
     private int totalTasksDropped;
     private final int maxTasks;
 
+    @Getter
     private final double sigma;
+    @Getter
     private final double lambda;
+    @Getter
     private final int numberOfCores;
 
     public Simulation(String name,
@@ -65,7 +73,7 @@ public class Simulation {
             }
         }
 
-        printStatistics();
+        // printStatistics();
     }
 
     private void scheduleTaskArrival() {
@@ -102,7 +110,7 @@ public class Simulation {
     }
 
     private void printStatistics() {
-        double probabilityOfIdle = server.getIdleTime() / server.getSystemTime();
+        double probabilityOfIdle = server.calculateSummaryIdleTime() / server.getSystemTime();
         double probabilityOfRejection = (double) totalTasksDropped / (totalTasksGenerated + totalTasksDropped);
         printDashes();
         printDashesWithName();
@@ -110,16 +118,28 @@ public class Simulation {
         System.out.println("Sigma: " + sigma + "; Lambda: " + lambda + "; Cores: " + numberOfCores);
         System.out.println("Probability of idle (Server): " + probabilityOfIdle);
         List<Core> cores = server.getCores();
-        for (int i = 0; i < numberOfCores; i++) {
-            double probabilityOfIdleCore = cores.get(i).getIdleTime() / server.getSystemTime();
-            System.out.println("Probability of idle (Core " + (i + 1) + "): " + probabilityOfIdleCore);
-        }
+//        for (int i = 0; i < numberOfCores; i++) {
+//            double probabilityOfIdleCore = cores.get(i).getIdleTime() / server.getSystemTime();
+//            System.out.println("Probability of idle (Core " + (i + 1) + "): " + probabilityOfIdleCore);
+//        }
         System.out.println("Probability of rejection: " + probabilityOfRejection);
         System.out.println("Total tasks processed: " + totalTasksProcessed);
         System.out.println("Total tasks dropped: " + totalTasksDropped);
         System.out.println("Total tasks generated: " + totalTasksGenerated);
         printDashes();
         printEnter();
+    }
+
+    public List<Double> getIdleTimes() {
+        return server.getIdleTimes();
+    }
+
+    public double getCalculateIdleTime() {
+        return server.calculateSummaryIdleTime();
+    }
+
+    public Double getSystemTime() {
+        return server.getSystemTime();
     }
 
     private void printDashesWithName() {
