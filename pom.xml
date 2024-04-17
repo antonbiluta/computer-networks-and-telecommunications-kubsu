@@ -10,7 +10,7 @@
   <name>computer-networks-and-telecommunications-kubsu</name>
   <url>http://maven.apache.org</url>
   <modules>
-    <module>task-1</module>
+    <module>task1</module>
   </modules>
 
   <properties>
